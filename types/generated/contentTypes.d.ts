@@ -788,6 +788,81 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiContributionsTypeContributionsType
+  extends Schema.CollectionType {
+  collectionName: 'contributions_types';
+  info: {
+    singularName: 'contributions-type';
+    pluralName: 'contributions-types';
+    displayName: 'Contributions Type';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    description: Attribute.String & Attribute.Unique;
+    title: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contributions-type.contributions-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contributions-type.contributions-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMemberMember extends Schema.CollectionType {
+  collectionName: 'members';
+  info: {
+    singularName: 'member';
+    pluralName: 'members';
+    displayName: 'Member';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    email: Attribute.Email;
+    payment_date: Attribute.DateTime;
+    validate_date: Attribute.DateTime;
+    birth_date: Attribute.Date;
+    provider: Attribute.String;
+    profile_picture: Attribute.Media<'images'>;
+    is_active: Attribute.Boolean;
+    contributions_type: Attribute.Relation<
+      'api::member.member',
+      'oneToOne',
+      'api::contributions-type.contributions-type'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::member.member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::member.member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -806,6 +881,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::contributions-type.contributions-type': ApiContributionsTypeContributionsType;
+      'api::member.member': ApiMemberMember;
     }
   }
 }
