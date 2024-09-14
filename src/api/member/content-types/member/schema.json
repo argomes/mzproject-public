@@ -45,6 +45,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::contributions-type.contributions-type"
+    },
+    "document": {
+      "type": "string"
     }
   }
 }
