@@ -845,6 +845,9 @@ export interface ApiMemberMember extends Schema.CollectionType {
       'oneToOne',
       'api::contributions-type.contributions-type'
     >;
+    document: Attribute.String;
+    link_payments_fetch: Attribute.String & Attribute.Private;
+    link_payments_cancel: Attribute.String & Attribute.Private;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -859,6 +862,33 @@ export interface ApiMemberMember extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSaleSale extends Schema.CollectionType {
+  collectionName: 'sales';
+  info: {
+    singularName: 'sale';
+    pluralName: 'sales';
+    displayName: 'Sale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String;
+    description: Attribute.String;
+    is_active: Attribute.Boolean;
+    qnt_month: Attribute.Integer;
+    amout: Attribute.Decimal;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -883,6 +913,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::contributions-type.contributions-type': ApiContributionsTypeContributionsType;
       'api::member.member': ApiMemberMember;
+      'api::sale.sale': ApiSaleSale;
     }
   }
 }

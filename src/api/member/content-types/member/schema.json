@@ -48,6 +48,14 @@
     },
     "document": {
       "type": "string"
+    },
+    "link_payments_fetch": {
+      "type": "string",
+      "private": true
+    },
+    "link_payments_cancel": {
+      "type": "string",
+      "private": true
     }
   }
 }
