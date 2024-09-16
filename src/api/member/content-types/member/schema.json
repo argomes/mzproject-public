@@ -56,6 +56,12 @@
     "link_payments_cancel": {
       "type": "string",
       "private": true
+    },
+    "subscription_push_notification": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
     }
   }
 }
