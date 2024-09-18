@@ -820,6 +820,30 @@ export interface ApiContributionsTypeContributionsType
   };
 }
 
+export interface ApiDdiDdi extends Schema.CollectionType {
+  collectionName: 'ddis';
+  info: {
+    singularName: 'ddi';
+    pluralName: 'ddis';
+    displayName: 'DDI';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ddi: Attribute.Integer;
+    country: Attribute.String;
+    emoji: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::ddi.ddi', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::ddi.ddi', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiMemberMember extends Schema.CollectionType {
   collectionName: 'members';
   info: {
@@ -914,6 +938,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::contributions-type.contributions-type': ApiContributionsTypeContributionsType;
+      'api::ddi.ddi': ApiDdiDdi;
       'api::member.member': ApiMemberMember;
       'api::sale.sale': ApiSaleSale;
     }
