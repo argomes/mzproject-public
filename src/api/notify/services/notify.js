@@ -1,5 +1,7 @@
 'use strict';
 
+const webPush = require('../../../../config/web-push');
+
 /**
 * notify service
 */
@@ -44,6 +46,18 @@ module.exports = () => ({
 			member.link_payments_fetch = charges[0].links.find((link) => link.rel == 'SELF').href
 			member.link_payments_cancel = charges[0].links.find((link) => link.rel == 'CHARGE.CANCEL').href
 			member.contributions_type.id = 4
+			
+			const subscription =  member.subscription_push_notification
+
+			await webPush.webpush.sendNotification({
+				endpoint: subscription['endpoint'],
+				keys: {
+					auth: subscription['keys'].auth,
+					p256dh: subscription['keys'].p256dh
+				}
+			}, JSON.stringify({
+					type: "colabore",
+					message: "pagamento efetuado com sucesso, obrigado pela sua colaboração"}))
 			return await strapi.entityService.update('api::member.member', member.id, {
 				data: member
 			})

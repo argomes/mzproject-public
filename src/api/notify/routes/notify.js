@@ -8,6 +8,15 @@ module.exports = {
         policies: [],
         middlewares: [],
       },
-     },
+    },
+    {
+      method: 'GET',
+      path: '/notify/publickey',
+      handler: 'notify.handlePublicKey',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    }
   ],
 };

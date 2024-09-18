@@ -57,11 +57,11 @@
       "type": "string",
       "private": true
     },
-    "subscription_push_notification": {
-      "type": "string"
-    },
     "phone": {
       "type": "string"
+    },
+    "subscription_push_notification": {
+      "type": "json"
     }
   }
 }

@@ -848,8 +848,8 @@ export interface ApiMemberMember extends Schema.CollectionType {
     document: Attribute.String;
     link_payments_fetch: Attribute.String & Attribute.Private;
     link_payments_cancel: Attribute.String & Attribute.Private;
-    subscription_push_notification: Attribute.String;
     phone: Attribute.String;
+    subscription_push_notification: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

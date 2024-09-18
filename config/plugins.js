@@ -9,11 +9,7 @@ module.exports = ({ env }) => ({
                 auth: {
                     user: env('SMTP_USERNAME', 'araceli51@ethereal.email'),
                     pass: env('SMTP_PASSWORD', 'k72WKERuWXdQ9EZjm9'),
-                },
-                secure: true,
-                tls: {
-                    rejectUnauthorized: true,
-                },
+                }
             }
         },
         settings: {
