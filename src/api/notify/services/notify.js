@@ -13,7 +13,7 @@ module.exports = () => ({
 			const value_by_day = 0.65
 			const qnt_days = (charges[0].amount.value / 100) / value_by_day
 			const validate_date = addDays(charges[0].paid_at , qnt_days)
-			const members = await strapi.entityService.findMany('api::member.member', {
+			const members = await strapi.documents('api::member.member').findMany({
 				filters:{$or:[{
 					email: customer.email
 				},
@@ -25,20 +25,18 @@ module.exports = () => ({
 			
 			if (members === undefined) {
 
-				return await strapi.entityService.create('api::member.member',
-					{
-						data:{
-							document: customer.tax_id,
-							name: customer.name,
-							email: customer.email,
-							payment_date: charges[0].paid_at,
-							validate_date: validate_date,
-							link_payments_fetch: charges[0].links.find((link) => link.rel == 'SELF').href,
-							is_active: false,
-							contributions_type: 4
-						}
-					}
-				)
+				return await strapi.documents('api::member.member').create({
+                    data:{
+                        document: customer.tax_id,
+                        name: customer.name,
+                        email: customer.email,
+                        payment_date: charges[0].paid_at,
+                        validate_date: validate_date,
+                        link_payments_fetch: charges[0].links.find((link) => link.rel == 'SELF').href,
+                        is_active: false,
+                        contributions_type: 4
+                    }
+                });
 			}
 			const member =  members[0];
 			member.payment_date = charges[0].paid_at
@@ -58,9 +56,10 @@ module.exports = () => ({
 			}, JSON.stringify({
 					type: "colabore",
 					message: "pagamento efetuado com sucesso, obrigado pela sua colaboração"}))
-			return await strapi.entityService.update('api::member.member', member.id, {
-				data: member
-			})
+			return await strapi.documents('api::member.member').update({
+                documentId: "__TODO__",
+                data: member
+            });
 		}
 	}
 });
