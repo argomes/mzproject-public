@@ -49,18 +49,13 @@
     "document": {
       "type": "string"
     },
-    "link_payments_fetch": {
-      "type": "string",
-      "private": true
-    },
-    "link_payments_cancel": {
-      "type": "string",
-      "private": true
-    },
     "phone": {
       "type": "string"
     },
     "subscription_push_notification": {
+      "type": "json"
+    },
+    "payload_contribution": {
       "type": "json"
     }
   }

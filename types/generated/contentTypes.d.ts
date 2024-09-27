@@ -566,10 +566,9 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
       'api::contributions-type.contributions-type'
     >;
     document: Schema.Attribute.String;
-    link_payments_fetch: Schema.Attribute.String & Schema.Attribute.Private;
-    link_payments_cancel: Schema.Attribute.String & Schema.Attribute.Private;
     phone: Schema.Attribute.String;
     subscription_push_notification: Schema.Attribute.JSON;
+    payload_contribution: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -579,6 +578,64 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::member.member'>;
+  };
+}
+
+export interface ApiParameterParameter extends Struct.SingleTypeSchema {
+  collectionName: 'parameters';
+  info: {
+    singularName: 'parameter';
+    pluralName: 'parameters';
+    displayName: 'Parameter';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    kofi: Schema.Attribute.String;
+    value_per_day: Schema.Attribute.Decimal;
+    kofi_type_description_donation: Schema.Attribute.String;
+    kofi_type_description_subscribe: Schema.Attribute.String;
+    minimum_monthly_amount: Schema.Attribute.Decimal;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::parameter.parameter'
+    >;
+  };
+}
+
+export interface ApiPlanPlan extends Struct.CollectionTypeSchema {
+  collectionName: 'plans';
+  info: {
+    singularName: 'plan';
+    pluralName: 'plans';
+    displayName: 'plan';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Schema.Attribute.String;
+    description: Schema.Attribute.String;
+    link: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::plan.plan'>;
   };
 }
 
@@ -989,6 +1046,8 @@ declare module '@strapi/strapi' {
       'api::contributions-type.contributions-type': ApiContributionsTypeContributionsType;
       'api::ddi.ddi': ApiDdiDdi;
       'api::member.member': ApiMemberMember;
+      'api::parameter.parameter': ApiParameterParameter;
+      'api::plan.plan': ApiPlanPlan;
       'api::sale.sale': ApiSaleSale;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
