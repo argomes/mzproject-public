@@ -569,6 +569,10 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
     phone: Schema.Attribute.String;
     subscription_push_notification: Schema.Attribute.JSON;
     payload_contribution: Schema.Attribute.JSON;
+    notifications: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notification.notification'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -578,6 +582,39 @@ export interface ApiMemberMember extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::member.member'>;
+  };
+}
+
+export interface ApiNotificationNotification
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'notifications';
+  info: {
+    singularName: 'notification';
+    pluralName: 'notifications';
+    displayName: 'Notification';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    member: Schema.Attribute.Relation<'manyToOne', 'api::member.member'>;
+    message: Schema.Attribute.String;
+    was_read: Schema.Attribute.Boolean;
+    title: Schema.Attribute.String;
+    link: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notification.notification'
+    >;
   };
 }
 
@@ -1046,6 +1083,7 @@ declare module '@strapi/strapi' {
       'api::contributions-type.contributions-type': ApiContributionsTypeContributionsType;
       'api::ddi.ddi': ApiDdiDdi;
       'api::member.member': ApiMemberMember;
+      'api::notification.notification': ApiNotificationNotification;
       'api::parameter.parameter': ApiParameterParameter;
       'api::plan.plan': ApiPlanPlan;
       'api::sale.sale': ApiSaleSale;
