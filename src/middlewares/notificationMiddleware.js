@@ -21,9 +21,8 @@ const webPush = require('../../config/web-push');
            const notificationPayload = {
             title: notification.title,
             body: notification.message,
-            icon: "https://some-image-url.jpg",
             data: {
-              url: "https://example.com",
+              url: notification.link,
             },
            }
            try{
@@ -33,7 +32,10 @@ const webPush = require('../../config/web-push');
                     auth: subscription['keys'].auth,
                     p256dh: subscription['keys'].p256dh
                 }
-            }, JSON.stringify(notificationPayload), {})
+            }, JSON.stringify(notificationPayload), {
+              topic: null,
+              urgency: 'high'
+            })
         } catch (error) {
             console.error('Erro ao enviar notificação:', error);
           }
