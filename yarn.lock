@@ -1846,6 +1846,29 @@
     argparse "~1.0.9"
     string-argv "~0.3.1"
 
+"@sendgrid/client@^7.7.0":
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/@sendgrid/client/-/client-7.7.0.tgz#f8f67abd604205a0d0b1af091b61517ef465fdbf"
+  integrity sha512-SxH+y8jeAQSnDavrTD0uGDXYIIkFylCo+eDofVmZLQ0f862nnqbC3Vd1ej6b7Le7lboyzQF6F7Fodv02rYspuA==
+  dependencies:
+    "@sendgrid/helpers" "^7.7.0"
+    axios "^0.26.0"
+
+"@sendgrid/helpers@^7.7.0":
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/@sendgrid/helpers/-/helpers-7.7.0.tgz#93fb4b6e2f0dc65080440d6a784cc93e8e148757"
+  integrity sha512-3AsAxfN3GDBcXoZ/y1mzAAbKzTtUZ5+ZrHOmWQ279AuaFXUNCh9bPnRpN504bgveTqoW+11IzPg3I0WVgDINpw==
+  dependencies:
+    deepmerge "^4.2.2"
+
+"@sendgrid/mail@7.7.0":
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/@sendgrid/mail/-/mail-7.7.0.tgz#aba09f5ce2e9d8ceee92284c3ea8b4a90b0e38fe"
+  integrity sha512-5+nApPE9wINBvHSUxwOxkkQqM/IAAaBYoP9hw7WwgDNQPxraruVqHizeTitVtKGiqWCKm2mnjh4XGN3fvFLqaw==
+  dependencies:
+    "@sendgrid/client" "^7.7.0"
+    "@sendgrid/helpers" "^7.7.0"
+
 "@simov/deep-extend@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@simov/deep-extend/-/deep-extend-1.0.0.tgz#dff17d38305614e296eb80bf4898b9d10b061325"
@@ -2314,6 +2337,14 @@
     lodash "4.17.21"
     nodemailer "6.9.1"
 
+"@strapi/provider-email-sendgrid@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@strapi/provider-email-sendgrid/-/provider-email-sendgrid-5.0.2.tgz#094fbb9f46fdcd652954d5b8acc7637e420b2fb5"
+  integrity sha512-UcT8KqHYAqUqQoXMG5tBIMA9VkmhNnXosvUSmcv1Tn86PDvg/7gbA+cfOHsuFKMe40rJHs3H928g3FjAkTgYMQ==
+  dependencies:
+    "@sendgrid/mail" "7.7.0"
+    "@strapi/utils" "5.0.2"
+
 "@strapi/provider-email-sendmail@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@strapi/provider-email-sendmail/-/provider-email-sendmail-5.0.0.tgz#9ab1ffd548970df23de823e74327865b7f261f25"
@@ -2510,6 +2541,22 @@
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.0.0.tgz#dc3fb07f449447a7d9b2c50c4fbb17507214b9cb"
   integrity sha512-qjjfog9fzTb6ERouKDNyH/SCLANe82EE9MzCsCC0FfB2Gb7XgpCoYF55Y9/9HW5G2iXbiw935uDe4g7ixkftQg==
+  dependencies:
+    "@sindresorhus/slugify" "1.1.0"
+    date-fns "2.30.0"
+    execa "5.1.1"
+    http-errors "2.0.0"
+    lodash "4.17.21"
+    node-machine-id "1.1.12"
+    p-map "4.0.0"
+    preferred-pm "3.1.2"
+    yup "0.32.9"
+    zod "^3.22.4"
+
+"@strapi/utils@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.0.2.tgz#b9f12b8fe6f3503dec41716e7f20b37ad9c67433"
+  integrity sha512-d/lObwgAgUbkcTBvSi/9tksX6hbwB2yhgelZvho1kt3zGcfYDPW5Ga40la+a9B1UbJOE2J7sBMmAs0zfChjm2A==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "2.30.0"
@@ -3557,6 +3604,13 @@ axios@1.7.4:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
+
+axios@^0.26.0:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.26.1.tgz#1ede41c51fcf51bbbd6fd43669caaa4f0495aaa9"
+  integrity sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==
+  dependencies:
+    follow-redirects "^1.14.8"
 
 b4a@^1.6.4, b4a@^1.6.6:
   version "1.6.6"
@@ -5430,7 +5484,7 @@ fn.name@1.x.x:
   resolved "https://registry.yarnpkg.com/fn.name/-/fn.name-1.1.0.tgz#26cad8017967aea8731bc42961d04a3d5988accc"
   integrity sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==
 
-follow-redirects@^1.15.6:
+follow-redirects@^1.14.8, follow-redirects@^1.15.6:
   version "1.15.9"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.9.tgz#a604fa10e443bf98ca94228d9eebcc2e8a2c8ee1"
   integrity sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==

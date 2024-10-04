@@ -1,20 +1,19 @@
-module.exports = ({ env }) => ({
-    i18n: true,
-    email: {
-        config: {
-            provider: 'nodemailer',
-            providerOptions: {
-                host: env('SMTP_HOST', 'smtp.ethereal.email'),
-                port: env('SMTP_PORT', 587),
-                auth: {
-                    user: env('SMTP_USERNAME', 'araceli51@ethereal.email'),
-                    pass: env('SMTP_PASSWORD', 'k72WKERuWXdQ9EZjm9'),
-                }
+module.exports = ({ env }) =>{
+    console.log(`configuration email ${env('EMAIL_DEFAULT')}`)
+    return {
+        email: {
+            config: {
+              provider: 'sendgrid',
+              providerOptions: {
+                apiKey: env('SENDGRID_API_KEY'),
+              },
+              settings: {
+                defaultFrom: env('EMAIL_DEFAULT'),
+                defaultReplyTo: env('EMAIL_DEFAULT'),
+              },
             }
-        },
-        settings: {
-            defaultFrom: env('EMAIL_DEFAULT'),
-            defaultReplyTo: env('EMAIL_DEFAULT'),
-        },
     }
-});
+    }
+}
+
+
