@@ -541,6 +541,34 @@ export interface ApiDdiDdi extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiIndexPageIndexPage extends Struct.SingleTypeSchema {
+  collectionName: 'index_pages';
+  info: {
+    singularName: 'index-page';
+    pluralName: 'index-pages';
+    displayName: 'Index Page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    text_footer: Schema.Attribute.RichText;
+    social_medias: Schema.Attribute.JSON;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::index-page.index-page'
+    >;
+  };
+}
+
 export interface ApiMemberMember extends Struct.CollectionTypeSchema {
   collectionName: 'members';
   info: {
@@ -655,7 +683,8 @@ export interface ApiPlanPlan extends Struct.CollectionTypeSchema {
   info: {
     singularName: 'plan';
     pluralName: 'plans';
-    displayName: 'plan';
+    displayName: 'Plan';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -695,6 +724,7 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
     >;
     content: Schema.Attribute.RichText;
     topic: Schema.Attribute.Relation<'oneToOne', 'api::topic.topic'>;
+    number_hits: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1138,6 +1168,7 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::contributions-type.contributions-type': ApiContributionsTypeContributionsType;
       'api::ddi.ddi': ApiDdiDdi;
+      'api::index-page.index-page': ApiIndexPageIndexPage;
       'api::member.member': ApiMemberMember;
       'api::notification.notification': ApiNotificationNotification;
       'api::parameter.parameter': ApiParameterParameter;

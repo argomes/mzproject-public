@@ -4,7 +4,8 @@
   "info": {
     "singularName": "plan",
     "pluralName": "plans",
-    "displayName": "plan"
+    "displayName": "Plan",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

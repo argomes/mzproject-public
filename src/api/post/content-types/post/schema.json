@@ -36,6 +36,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::topic.topic"
+    },
+    "number_hits": {
+      "type": "integer"
     }
   }
 }
